@@ -2,6 +2,7 @@ package ebitenx
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 type Game[STATE any] struct {
@@ -19,6 +20,7 @@ func (g *Game[STATE]) Update() error {
 		g.GameAPI = NewGameApi(g)
 	}
 	if g.Updater != nil {
+		g.GameAPI.pressedKeys = inpututil.PressedKeys()
 		return g.Updater(g.GameAPI)
 	}
 	return nil

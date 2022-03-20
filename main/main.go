@@ -24,7 +24,8 @@ func update(api *ebitenx.GameAPI[*CurState]) error {
 		api.Game.State.x -= 1
 	} else if api.Pressed(ebiten.KeyRight) {
 		api.Game.State.x += 1
-	} else if api.Pressed(ebiten.KeyUp) {
+	}
+	if api.Pressed(ebiten.KeyUp) {
 		api.Game.State.y -= 1
 	} else if api.Pressed(ebiten.KeyDown) {
 		api.Game.State.y += 1
