@@ -8,7 +8,7 @@ func ColorOf(r uint8, g uint8, b uint8) color.Color {
 
 var (
 	COLOR_RED          = ColorOf(255, 0, 0)
-	COLOR_DAR_RED      = ColorOf(139, 0, 0)
+	COLOR_DARK_RED     = ColorOf(139, 0, 0)
 	COLOR_GREEN        = ColorOf(0, 128, 0)
 	COLOR_BRIGHT_GREEN = ColorOf(0, 255, 0)
 	COLOR_BLUE         = ColorOf(0, 0, 255)

@@ -7,10 +7,11 @@ import (
 type CurState struct {
 	x, y   int
 	mx, my int
+	mb     bool
 }
 
 func main() {
-	ebitenx.NewGame(&CurState{10, 10, 0, 0}, update, draw).Loop()
+	ebitenx.NewGame(&CurState{10, 10, 0, 0, false}, update, draw).Loop()
 }
 
 func draw(api *ebitenx.DrawAPI[*CurState]) {
@@ -18,6 +19,9 @@ func draw(api *ebitenx.DrawAPI[*CurState]) {
 	api.DrawRect(float64(api.State.x), float64(api.State.y), 10, 10, ebitenx.ColorOf(128, uint8(api.State.mx), uint8(api.State.my)))
 
 	api.DrawRect(float64(api.State.mx), float64(api.State.my), 10, 10, ebitenx.COLOR_CYAN)
+	if api.State.mb {
+		api.DrawRect(100, 100, 25, 25, ebitenx.COLOR_DARK_RED)
+	}
 }
 
 func update(api *ebitenx.GameAPI[*CurState]) error {
@@ -32,5 +36,6 @@ func update(api *ebitenx.GameAPI[*CurState]) error {
 		api.Game.State.y += 1
 	}
 	api.Game.State.mx, api.Game.State.my = api.GetMousePos()
+	api.Game.State.mb = api.MousePressed(ebitenx.MouseButtonLeft)
 	return nil
 }
