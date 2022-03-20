@@ -7,18 +7,18 @@ import (
 
 type GameAPI[STATE any] struct {
 	Game        *Game[STATE]
-	pressedKeys []ebiten.Key // Updated only in *Game[STATE]
+	pressedKeys []int // Updated only in *Game[STATE]
 }
 
-func (g *GameAPI[STATE]) PressedKeys() []ebiten.Key {
+func (g *GameAPI[STATE]) PressedKeys() []int {
 	return g.pressedKeys
 }
 
-func (g *GameAPI[STATE]) JustPressed(key ebiten.Key) bool {
-	return inpututil.IsKeyJustPressed(key)
+func (g *GameAPI[STATE]) JustPressed(key int) bool {
+	return inpututil.IsKeyJustPressed(ebiten.Key(key))
 }
 
-func (g *GameAPI[STATE]) Pressed(key ebiten.Key) bool {
+func (g *GameAPI[STATE]) Pressed(key int) bool {
 	ks := g.PressedKeys()
 	if len(ks) < 1 {
 		return false
@@ -44,5 +44,5 @@ func (g *GameAPI[STATE]) GetMousePos() (int, int) {
 }
 
 func NewGameApi[STATE any](g *Game[STATE]) *GameAPI[STATE] {
-	return &GameAPI[STATE]{g, []ebiten.Key{}}
+	return &GameAPI[STATE]{g, []int{}}
 }

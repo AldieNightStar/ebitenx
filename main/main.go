@@ -4,7 +4,6 @@ import (
 	"image/color"
 
 	"github.com/AldieNightStar/ebitenx"
-	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type CurState struct {
@@ -12,7 +11,7 @@ type CurState struct {
 }
 
 func main() {
-	ebitenx.NewGame(&CurState{}).Drawer(draw).Updater(update).Build().Loop()
+	ebitenx.NewGame(&CurState{10, 10}).Drawer(draw).Updater(update).Build().Loop()
 }
 
 func draw(state *CurState, api *ebitenx.DrawAPI) {
@@ -20,14 +19,14 @@ func draw(state *CurState, api *ebitenx.DrawAPI) {
 }
 
 func update(api *ebitenx.GameAPI[*CurState]) error {
-	if api.Pressed(ebiten.KeyLeft) {
+	if api.Pressed(ebitenx.KeyLeft) {
 		api.Game.State.x -= 1
-	} else if api.Pressed(ebiten.KeyRight) {
+	} else if api.Pressed(ebitenx.KeyRight) {
 		api.Game.State.x += 1
 	}
-	if api.Pressed(ebiten.KeyUp) {
+	if api.Pressed(ebitenx.KeyUp) {
 		api.Game.State.y -= 1
-	} else if api.Pressed(ebiten.KeyDown) {
+	} else if api.Pressed(ebitenx.KeyDown) {
 		api.Game.State.y += 1
 	}
 	return nil

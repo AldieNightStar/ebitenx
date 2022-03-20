@@ -20,7 +20,7 @@ func (g *Game[STATE]) Update() error {
 		g.GameAPI = NewGameApi(g)
 	}
 	if g.Updater != nil {
-		g.GameAPI.pressedKeys = inpututil.PressedKeys()
+		g.GameAPI.pressedKeys = convertKeysToInts(inpututil.PressedKeys())
 		return g.Updater(g.GameAPI)
 	}
 	return nil
