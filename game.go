@@ -1,6 +1,8 @@
 package ebitenx
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type Game[STATE any] struct {
 	screenWidth  int
@@ -8,6 +10,7 @@ type Game[STATE any] struct {
 	state        STATE
 	Updater      Updater[STATE]
 	Drawer       Drawer[STATE]
+	DrawApi      *DrawAPI
 }
 
 func (g *Game[STATE]) Update() error {
@@ -18,8 +21,11 @@ func (g *Game[STATE]) Update() error {
 }
 
 func (g *Game[STATE]) Draw(screen *ebiten.Image) {
+	if g.DrawApi == nil {
+		g.DrawApi = NewDrawApi(screen)
+	}
 	if g.Drawer != nil {
-		g.Drawer(g.state, screen)
+		g.Drawer(g.state, g.DrawApi)
 	}
 }
 
