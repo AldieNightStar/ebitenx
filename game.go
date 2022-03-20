@@ -7,15 +7,19 @@ import (
 type Game[STATE any] struct {
 	screenWidth  int
 	screenHeight int
-	state        STATE
+	State        STATE
 	Updater      Updater[STATE]
 	Drawer       Drawer[STATE]
 	DrawApi      *DrawAPI
+	GameAPI      *GameAPI[STATE]
 }
 
 func (g *Game[STATE]) Update() error {
+	if g.GameAPI == nil {
+		g.GameAPI = NewGameApi(g)
+	}
 	if g.Updater != nil {
-		return g.Updater(g, g.state)
+		return g.Updater(g.GameAPI)
 	}
 	return nil
 }
@@ -25,7 +29,7 @@ func (g *Game[STATE]) Draw(screen *ebiten.Image) {
 		g.DrawApi = NewDrawApi(screen)
 	}
 	if g.Drawer != nil {
-		g.Drawer(g.state, g.DrawApi)
+		g.Drawer(g.State, g.DrawApi)
 	}
 }
 

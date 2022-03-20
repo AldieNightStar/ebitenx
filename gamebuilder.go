@@ -26,6 +26,6 @@ func (g *GameBuilder[STATE]) Build() *Game[STATE] {
 
 func NewGame[STATE any](state STATE) *GameBuilder[STATE] {
 	return &GameBuilder[STATE]{
-		&Game[STATE]{640, 480, state, nil, nil, nil},
+		&Game[STATE]{640, 480, state, nil, nil, nil, nil},
 	}
 }
