@@ -1,6 +1,7 @@
 # Ebiten-X
 ## Easier way to create games
-Based on `Ebiten` lib
+* Based on `Ebiten` lib
+* Generics
 
 # Import
 ```go
