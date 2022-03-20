@@ -7,7 +7,7 @@ Based on `Ebiten` lib
 import "github.com/AldieNightStar/ebitenx"
 ```
 
-# New Game
+# API
 ```go
 // This is state object
 // Used for current game logic
@@ -35,8 +35,9 @@ func update(api *ebitenx.GameAPI[*CurState]) error {
 	api.JustPressed(ebitenx.KeyA) // bool - returns true if key is pressed JUST NOW (One time per frame)
 	api.Pressed(ebitenx.KeyA) // bool - returns true if key is pressed
 
-	api.JustMousePressed(ebitenx.MouseButtonLeft) // Mouse just pressed true/false
-	api.JustMouseReleased(ebitenx.MouseButtonLeft) // Mouse just released true/false
+	api.JustMousePressed(ebitenx.MouseButtonLeft) // Mouse just pressed :: true/false
+	api.JustMouseReleased(ebitenx.MouseButtonLeft) // Mouse just released :: true/false
+	api.MousePressed(ebitenx.MouseButtonLeft) // Mouse pressed :: true/false
 	
 	api.GetMousePos() // x, y int - returns x,y mouse pos on the screen
 

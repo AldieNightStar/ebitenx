@@ -31,12 +31,16 @@ func (g *GameAPI[STATE]) Pressed(key int) bool {
 	return false
 }
 
-func (g *GameAPI[STATE]) JustMousePressed(button ebiten.MouseButton) bool {
-	return inpututil.IsMouseButtonJustPressed(button)
+func (g *GameAPI[STATE]) JustMousePressed(button int) bool {
+	return inpututil.IsMouseButtonJustPressed(ebiten.MouseButton(button))
 }
 
-func (g *GameAPI[STATE]) JustMouseReleased(button ebiten.MouseButton) bool {
-	return inpututil.IsMouseButtonJustReleased(button)
+func (g *GameAPI[STATE]) JustMouseReleased(button int) bool {
+	return inpututil.IsMouseButtonJustReleased(ebiten.MouseButton(button))
+}
+
+func (g *GameAPI[STATE]) MousePressed(button int) bool {
+	return ebiten.IsMouseButtonPressed(ebiten.MouseButton(button))
 }
 
 func (g *GameAPI[STATE]) GetMousePos() (int, int) {
