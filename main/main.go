@@ -1,21 +1,23 @@
 package main
 
 import (
-	"image/color"
-
 	"github.com/AldieNightStar/ebitenx"
 )
 
 type CurState struct {
-	x, y int
+	x, y   int
+	mx, my int
 }
 
 func main() {
-	ebitenx.NewGame(&CurState{10, 10}, update, draw).Loop()
+	ebitenx.NewGame(&CurState{10, 10, 0, 0}, update, draw).Loop()
 }
 
 func draw(api *ebitenx.DrawAPI[*CurState]) {
-	api.SetPixel(api.State.x, api.State.y, color.RGBA{255, 0, 0, 0})
+	api.DrawLine(0, 0, float64(api.State.x), float64(api.State.y), ebitenx.COLOR_BLUE)
+	api.DrawRect(float64(api.State.x), float64(api.State.y), 10, 10, ebitenx.ColorOf(128, uint8(api.State.mx), uint8(api.State.my)))
+
+	api.DrawRect(float64(api.State.mx), float64(api.State.my), 10, 10, ebitenx.COLOR_CYAN)
 }
 
 func update(api *ebitenx.GameAPI[*CurState]) error {
@@ -29,5 +31,6 @@ func update(api *ebitenx.GameAPI[*CurState]) error {
 	} else if api.Pressed(ebitenx.KeyDown) {
 		api.Game.State.y += 1
 	}
+	api.Game.State.mx, api.Game.State.my = api.GetMousePos()
 	return nil
 }

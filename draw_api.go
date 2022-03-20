@@ -4,6 +4,7 @@ import (
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 type DrawAPI[STATE any] struct {
@@ -28,6 +29,14 @@ func (d *DrawAPI[STATE]) DrawImage(img *ebiten.Image, x, y float64) {
 
 func (d *DrawAPI[STATE]) SetPixel(x, y int, c color.Color) {
 	d.src.Set(x, y, c)
+}
+
+func (d *DrawAPI[STATE]) DrawRect(x, y, w, h float64, c color.Color) {
+	ebitenutil.DrawRect(d.src, x, y, w, h, c)
+}
+
+func (d *DrawAPI[STATE]) DrawLine(x1, y1, x2, y2 float64, c color.Color) {
+	ebitenutil.DrawLine(d.src, x1, y1, x2, y2, c)
 }
 
 func NewDrawApi[STATE any](img *ebiten.Image, state STATE) *DrawAPI[STATE] {
