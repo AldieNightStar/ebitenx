@@ -11,7 +11,7 @@ type Game[STATE any] struct {
 	State        STATE
 	Updater      Updater[STATE]
 	Drawer       Drawer[STATE]
-	DrawApi      *DrawAPI
+	DrawApi      *DrawAPI[STATE]
 	GameAPI      *GameAPI[STATE]
 }
 
@@ -28,10 +28,10 @@ func (g *Game[STATE]) Update() error {
 
 func (g *Game[STATE]) Draw(screen *ebiten.Image) {
 	if g.DrawApi == nil {
-		g.DrawApi = NewDrawApi(screen)
+		g.DrawApi = NewDrawApi(screen, g.State)
 	}
 	if g.Drawer != nil {
-		g.Drawer(g.State, g.DrawApi)
+		g.Drawer(g.DrawApi)
 	}
 }
 

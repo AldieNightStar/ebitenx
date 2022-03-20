@@ -14,8 +14,8 @@ func main() {
 	ebitenx.NewGame(&CurState{10, 10}).Drawer(draw).Updater(update).Build().Loop()
 }
 
-func draw(state *CurState, api *ebitenx.DrawAPI) {
-	api.SetPixel(state.x, state.y, color.RGBA{255, 0, 0, 0})
+func draw(api *ebitenx.DrawAPI[*CurState]) {
+	api.SetPixel(api.State.x, api.State.y, color.RGBA{255, 0, 0, 0})
 }
 
 func update(api *ebitenx.GameAPI[*CurState]) error {

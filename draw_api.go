@@ -6,29 +6,30 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-type DrawAPI struct {
-	src *ebiten.Image
+type DrawAPI[STATE any] struct {
+	src   *ebiten.Image
+	State STATE
 }
 
-func (d *DrawAPI) Image() *ebiten.Image {
+func (d *DrawAPI[STATE]) Image() *ebiten.Image {
 	return d.src
 }
 
-func (d *DrawAPI) DrawImageScale(img *ebiten.Image, x, y, scaleX, scaleY float64) {
+func (d *DrawAPI[STATE]) DrawImageScale(img *ebiten.Image, x, y, scaleX, scaleY float64) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(x, y)
 	op.GeoM.Scale(scaleX, scaleY)
 	d.src.DrawImage(img, op)
 }
 
-func (d *DrawAPI) DrawImage(img *ebiten.Image, x, y float64) {
+func (d *DrawAPI[STATE]) DrawImage(img *ebiten.Image, x, y float64) {
 	d.DrawImageScale(img, x, y, 1, 1)
 }
 
-func (d *DrawAPI) SetPixel(x, y int, c color.Color) {
+func (d *DrawAPI[STATE]) SetPixel(x, y int, c color.Color) {
 	d.src.Set(x, y, c)
 }
 
-func NewDrawApi(img *ebiten.Image) *DrawAPI {
-	return &DrawAPI{img}
+func NewDrawApi[STATE any](img *ebiten.Image, state STATE) *DrawAPI[STATE] {
+	return &DrawAPI[STATE]{img, state}
 }
