@@ -11,7 +11,7 @@ type CurState struct {
 }
 
 func main() {
-	ebitenx.NewGame(&CurState{10, 10}).Drawer(draw).Updater(update).Build().Loop()
+	ebitenx.NewGame(&CurState{10, 10}, update, draw).Loop()
 }
 
 func draw(api *ebitenx.DrawAPI[*CurState]) {
