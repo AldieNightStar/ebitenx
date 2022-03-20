@@ -47,6 +47,6 @@ func (g *GameAPI[STATE]) GetMousePos() (int, int) {
 	return ebiten.CursorPosition()
 }
 
-func NewGameApi[STATE any](g *Game[STATE]) *GameAPI[STATE] {
+func newGameApi[STATE any](g *Game[STATE]) *GameAPI[STATE] {
 	return &GameAPI[STATE]{g, []int{}}
 }

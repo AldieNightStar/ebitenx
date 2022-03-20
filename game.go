@@ -17,7 +17,7 @@ type Game[STATE any] struct {
 
 func (g *Game[STATE]) Update() error {
 	if g.GameAPI == nil {
-		g.GameAPI = NewGameApi(g)
+		g.GameAPI = newGameApi(g)
 	}
 	if g.Updater != nil {
 		g.GameAPI.pressedKeys = convertKeysToInts(inpututil.PressedKeys())
@@ -28,7 +28,7 @@ func (g *Game[STATE]) Update() error {
 
 func (g *Game[STATE]) Draw(screen *ebiten.Image) {
 	if g.DrawApi == nil {
-		g.DrawApi = NewDrawApi(screen, g.State)
+		g.DrawApi = newDrawApi(screen, g.State)
 	}
 	if g.Drawer != nil {
 		g.Drawer(g.DrawApi)

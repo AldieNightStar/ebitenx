@@ -39,6 +39,6 @@ func (d *DrawAPI[STATE]) DrawLine(x1, y1, x2, y2 float64, c color.Color) {
 	ebitenutil.DrawLine(d.src, x1, y1, x2, y2, c)
 }
 
-func NewDrawApi[STATE any](img *ebiten.Image, state STATE) *DrawAPI[STATE] {
+func newDrawApi[STATE any](img *ebiten.Image, state STATE) *DrawAPI[STATE] {
 	return &DrawAPI[STATE]{img, state}
 }
