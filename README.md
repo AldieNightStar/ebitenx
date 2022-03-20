@@ -2,6 +2,7 @@
 ## Easier way to create games
 * Based on `Ebiten` lib
 * Generics
+* You still can use `ebiten.*` and `ebitenutils.*` etc as before. Nothing special changed
 
 # Import
 ```go
